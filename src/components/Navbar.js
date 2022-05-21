@@ -1,36 +1,24 @@
-import { useEffect, useState } from "react"
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable jsx-a11y/anchor-has-content */
+import { useEffect, useState, useContext } from "react"
 import React from "react"
 import Instagram from "../assets/insta.png";
 import "../style/style.css";
 
-import { getSession, auth } from "../api/auth"
-import Profile from "./Profile";
-// import { useContext } from "react"
-// import { SessionContext } from "../context/SessionContext"
-// import { Profiler } from "react";
+import { auth } from "../api/auth"
+import { SessionContext } from "../context/SessionContext";
+import { getProfile } from "../api/profile";
 
 export default function Navbar() {
   // TODO: answer here
-  const[isLogin, setIsLogin] = useState(false);
+  const { isLogin, idUser } = useContext(SessionContext)
   const[profile, setProfile] = useState();
-  const getProfile = async ()=> {
-    try {
-      const session = await getSession();
-      const respons = session.data.user;
-      if (respons){
-        // setIsLogin(true);
-        console.log('belum login');
-      }
-      setProfile(respons);
-      //console.log(respons);
-    } catch (err) {
-      console.log("error fetch data ", err);
-    }
-  }
+
   useEffect(()=> {
-    getProfile();
-  },[]);
-  console.log(isLogin);
+    getProfile(idUser).then(res => setProfile(res?.data?.profile))
+  },[idUser]);
+  console.log(isLogin)
+
     return(
       <div aria-label="Navbar" className="navbar">
         <div>
@@ -43,7 +31,7 @@ export default function Navbar() {
         <div>
           {isLogin ?(
             <div className="user-login">
-              <p className="user-profile" onClick={() => Profile()}>{profile?.name}</p>
+              <p className="user-profile" onClick={()=> auth()} >{profile?.name}</p>
               <img src={profile?.image}  className="profile-pict"/>
             </div>
           ):(
@@ -52,8 +40,6 @@ export default function Navbar() {
             </div>
           )}
         </div>
-        
-
       </div>
     )
 

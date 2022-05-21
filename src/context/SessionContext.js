@@ -6,4 +6,11 @@ export const SessionContext = createContext({
 
 export const SessionProvider = ({ children }) => {
   // TODO: answer here
+  const [isLogin, setIsLogin] = useState();
+  const [idUser, setIdUser] = useState();
+  return (
+    <SessionContext.Provider value={{ isLogin, setIsLogin, idUser, setIdUser }}>
+      {children}
+    </SessionContext.Provider>
+  );
 }
