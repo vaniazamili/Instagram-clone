@@ -5,13 +5,19 @@ import "../style/profile.css";
 const LoginControl = (props) => {
   
 }
-export default function Profile() {
+const Profile = () => {
   // TODO: answer here
   return(
     <div aria-label="Profile">
+      <div className="post-profile">
+        
+
+      </div>
 
 
     </div>
-)
+  )
 
 }
+
+export default Profile;

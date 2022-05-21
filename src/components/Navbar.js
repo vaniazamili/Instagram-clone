@@ -17,7 +17,10 @@ export default function Navbar() {
     try {
       const session = await getSession();
       const respons = session.data.user;
-      setIsLogin(true);
+      if (respons){
+        // setIsLogin(true);
+        console.log('belum login');
+      }
       setProfile(respons);
       //console.log(respons);
     } catch (err) {
@@ -27,6 +30,7 @@ export default function Navbar() {
   useEffect(()=> {
     getProfile();
   },[]);
+  console.log(isLogin);
     return(
       <div aria-label="Navbar" className="navbar">
         <div>
@@ -39,13 +43,12 @@ export default function Navbar() {
         <div>
           {isLogin ?(
             <div className="user-login">
-              <p className="user-profile" onClick={() => Profile()}>{profile.name}</p>
-              <img src={profile.image}  className="profile-pict"/>
+              <p className="user-profile" onClick={() => Profile()}>{profile?.name}</p>
+              <img src={profile?.image}  className="profile-pict"/>
             </div>
           ):(
             <div>
               <button onClick={() => auth()}>Login</button>
-              
             </div>
           )}
         </div>
