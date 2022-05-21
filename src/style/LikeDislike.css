@@ -1,0 +1,18 @@
+.btn-likeDislike{
+    display: flex;
+}
+button{
+ padding: 10px;   
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+}
+.button-like{
+    background-color: royalblue;
+}
+.button-dislike{
+    background-color: salmon;
+}
+.btn-like{
+    margin-right: 5px;
+}
